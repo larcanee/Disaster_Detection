@@ -45,7 +45,3 @@ df['preprocessed_text'] = df['text'].apply(preprocess_text)
 
 # Save the preprocessed data to a new CSV file
 df.to_csv('preprocessed_data.csv', index=False)  # Save to a new file, replace 'preprocessed_data.csv' with your desired filename
-
-# input_text = "Computer deciphers lower case and capitalized letters differently, and game57 is a challenge. http://example.com"
-# preprocessed_text = preprocess_text(input_text)
-# print(preprocessed_text)

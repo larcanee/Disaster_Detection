@@ -13,7 +13,7 @@ df_encoded = df.copy(deep = True)
 le_gen = LabelEncoder()
 df_encoded['keyword'] = le_gen.fit_transform(df['keyword'])
 
-Train_X,Test_X,Train_Y,Test_Y = model_selection.train_test_split(df['preprocessed_text'],df['target'],test_size = 0.3)
+Train_X,Test_X,Train_Y,Test_Y = model_selection.train_test_split(df['preprocessed_text'],df['target'],test_size = 0.2)
 encoder = LabelEncoder()
 Train_Y = encoder.fit_transform(Train_Y)
 Test_Y = encoder.fit_transform(Test_Y)

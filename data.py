@@ -20,7 +20,7 @@ df = pd.read_csv('preprocessed_data.csv')
 df1 = df[df['target'] == 1]
 df0 = df[df['target'] == 0]
 
-df["wordcount"] = df.preprocessed_text.str.split().map(lambda x: len(x))
+#df["wordcount"] = df.preprocessed_text.str.split().map(lambda x: len(x))
   
 # iterate through the csv file
 for val in df1.preprocessed_text:

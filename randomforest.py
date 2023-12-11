@@ -10,10 +10,11 @@ import re
 # Load your preprocessed data
 # Assuming you have a CSV file with columns 'text' and 'label'
 df = pd.read_csv('preprocessed_data.csv')
+df['preprocessed_text'].fillna('', inplace=True)
 
 # Feature Extraction
 tfidf_vectorizer = TfidfVectorizer(max_features=5000)
-features = tfidf_vectorizer.fit_transform(df['text']).toarray()
+features = tfidf_vectorizer.fit_transform(df['preprocessed_text']).toarray()
 labels = df['target']
 
 # Data Splitting

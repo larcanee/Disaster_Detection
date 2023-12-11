@@ -4,14 +4,13 @@ from sklearn import model_selection,naive_bayes
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score
-
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 df = pd.read_csv('preprocessed_data.csv') 
 df['preprocessed_text'].fillna('', inplace=True)
 
 df_encoded = df.copy(deep = True)
 le_gen = LabelEncoder()
-df_encoded['keyword'] = le_gen.fit_transform(df['keyword'])
+df_encoded['target'] = le_gen.fit_transform(df['target'])
 
 Train_X,Test_X,Train_Y,Test_Y = model_selection.train_test_split(df['preprocessed_text'],df['target'],test_size = 0.2)
 encoder = LabelEncoder()
@@ -23,9 +22,12 @@ Tfidf_vect.fit(df['preprocessed_text'])
 Train_X_Tfidf = Tfidf_vect.transform(Train_X)
 Test_X_Tfidf = Tfidf_vect.transform(Test_X)
 
-logreg = LogisticRegression(solver='liblinear')
+logreg = LogisticRegression(solver='lbfgs')
 logreg.fit(Train_X_Tfidf,Train_Y)
 
 predictions = logreg.predict(Test_X_Tfidf)
-print(predictions)
+conf_matrix = confusion_matrix(Test_Y, predictions)
+
 print("Accuracy : ", accuracy_score(predictions,Test_Y))
+print(f"Confusion Matrix:\n{conf_matrix}")
+print('Classification Report for Phase 1:\n', classification_report(Test_Y, predictions))
